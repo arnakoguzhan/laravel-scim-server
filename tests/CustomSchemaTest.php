@@ -4,6 +4,7 @@ namespace ArieTimmerman\Laravel\SCIMServer\Tests;
 
 use ArieTimmerman\Laravel\SCIMServer\Attribute\Attribute;
 use ArieTimmerman\Laravel\SCIMServer\SCIMConfig;
+use ArieTimmerman\Laravel\SCIMServer\Tests\Model\User;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
@@ -98,5 +99,29 @@ class CustomSchemaTest extends TestCase
 
         $this->assertArrayHasKey('urn:ietf:params:scim:schemas:extension:enterprise:2.0:User', $json);
         $this->assertEquals('12345', $json['urn:ietf:params:scim:schemas:extension:enterprise:2.0:User']['employeeNumber']);
+    }
+
+    public function testPatchAddEnterpriseSchemaWithValuePayload()
+    {
+        $response = $this->patch('/scim/v2/Users/2', [
+            "schemas" => [
+                "urn:ietf:params:scim:api:messages:2.0:PatchOp",
+            ],
+            "Operations" => [
+                [
+                    "op" => "add",
+                    "value" => [
+                        "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:employeeNumber" => "12345",
+                    ]
+                ]
+            ]
+        ]);
+
+        $response->assertStatus(200);
+
+        $json = $response->json();
+
+        $this->assertEquals('12345', $json['urn:ietf:params:scim:schemas:extension:enterprise:2.0:User']['employeeNumber']);
+        $this->assertEquals('12345', User::find(2)->employeeNumber);
     }
 }

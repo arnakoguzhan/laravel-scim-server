@@ -288,16 +288,33 @@ class Complex extends AbstractComplex
                 throw new SCIMException('Invalid key: ' . $key . ' for complex object ' . $this->getFullKey());
             }
 
-            $path = Parser::parse($key);
+            $subNode = null;
+            $path = null;
 
-            if ($path->isNotEmpty()) {
-                $attributeNames = $path->getAttributePathAttributes();
-                $path = $path->shiftAttributePathAttributes();
-                $subNode = $this->getSubNode($attributeNames[0]);
+            // Attempt direct schema match first so schema URNs (e.g. urn:...:User) resolve to their schema node.
+            if (strpos($key, ':') !== false) {
+                $subNode = $this->getSubNode($key);
+            }
+
+            if ($subNode === null) {
+                $path = Parser::parse($key);
+
+                if ($path->isNotEmpty()) {
+                    $attributeNames = $path->getAttributePathAttributes();
+                    $schema = $path->getAttributePath()?->path?->schema;
+                    $path = $path->shiftAttributePathAttributes();
+
+                    $subNode = $schema
+                        ? ((($parent = $this->getSubNode($schema)) instanceof Schema) ? $parent->getSubNode($attributeNames[0] ?? null) : null)
+                        : $this->getSubNode($attributeNames[0] ?? null);
+                }
+            }
+
+            if ($subNode != null) {
                 $match = true;
 
                 $newValue = $v;
-                if ($path->isNotEmpty()) {
+                if ($path != null && $path->isNotEmpty()) {
                     $newValue = [
                         implode('.', $path->getAttributePathAttributes()) => $v
                     ];
