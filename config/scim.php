@@ -14,5 +14,8 @@ return [
         'defaultPageSize' => 10,
         'maxPageSize' => 100,
         'cursorPaginationEnabled' => true,
+    ],
+    "authenticationSchemes" => [
+        "oauthbearertoken"
     ]
 ];
