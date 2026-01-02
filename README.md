@@ -1,7 +1,7 @@
 
-![](https://github.com/arietimmerman/laravel-scim-server/workflows/CI/badge.svg)
-[![Latest Stable Version](https://poser.pugx.org/arietimmerman/laravel-scim-server/v/stable)](https://packagist.org/packages/arietimmerman/laravel-scim-server)
-[![Total Downloads](https://poser.pugx.org/arietimmerman/laravel-scim-server/downloads)](https://packagist.org/packages/arietimmerman/laravel-scim-server)
+![](https://github.com/arnakoguzhan/laravel-scim-server/workflows/CI/badge.svg)
+[![Latest Stable Version](https://poser.pugx.org/arnakoguzhan/laravel-scim-server/v/stable)](https://packagist.org/packages/arnakoguzhan/laravel-scim-server)
+[![Total Downloads](https://poser.pugx.org/arnakoguzhan/laravel-scim-server/downloads)](https://packagist.org/packages/arnakoguzhan/laravel-scim-server)
 
 # SCIM 2.0 Server implementation for Laravel
 
@@ -10,7 +10,7 @@ Add SCIM 2.0 Server capabilities with ease. Usually, no configuration is needed 
 > **Note**: Version 2.0+ requires **PHP 7.4+** (including PHP 8.0, 8.1, 8.2, 8.3) and supports **Laravel 7 through 12**.
 
 ~~~
-composer require arietimmerman/laravel-scim-server "^2.0"
+composer require arnakoguzhan/laravel-scim-server "^2.0"
 ~~~
 
 And optionally

@@ -1,5 +1,5 @@
 {
-    "name": "arietimmerman/laravel-scim-server",
+    "name": "arnakoguzhan/laravel-scim-server",
     "description": "Laravel Package for creating a SCIM server",
     "type": "library",
     "license": "MIT",
