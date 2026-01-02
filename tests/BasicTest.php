@@ -18,11 +18,9 @@ class BasicTest extends TestCase
         
         $this->loadLaravelMigrations('testbench');
         
-        $this->withFactories(realpath(dirname(__DIR__).'/database/factories'));
-        
         \ArieTimmerman\Laravel\SCIMServer\RouteProvider::routes();
         
-        factory(\ArieTimmerman\Laravel\SCIMServer\Tests\Model\User::class, 100)->create();
+        \ArieTimmerman\Laravel\SCIMServer\Tests\Model\User::factory()->count(100)->create();
     }
 
     protected function getEnvironmentSetUp($app)

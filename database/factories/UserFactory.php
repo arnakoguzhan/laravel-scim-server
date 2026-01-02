@@ -1,12 +1,20 @@
 <?php
 
-use Faker\Generator;
+namespace ArieTimmerman\Laravel\SCIMServer\Database\Factories;
 
-$factory->define(ArieTimmerman\Laravel\SCIMServer\Tests\Model\User::class, function (Generator $faker) {
-    return [
-       // 'username' => $faker->userName,
-        'email' => $faker->email,
-        'name' => $faker->name,
-        'password'=>'test'
-    ];
-});
+use ArieTimmerman\Laravel\SCIMServer\Tests\Model\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class UserFactory extends Factory
+{
+    protected $model = User::class;
+
+    public function definition(): array
+    {
+        return [
+            'email' => $this->faker->email(),
+            'name' => $this->faker->name(),
+            'password' => 'test',
+        ];
+    }
+}
