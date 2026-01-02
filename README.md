@@ -7,8 +7,10 @@
 
 Add SCIM 2.0 Server capabilities with ease. Usually, no configuration is needed in order to benefit from the basic functionalities.
 
+> **Note**: Version 2.0+ requires **PHP 7.4+** (including PHP 8.0, 8.1, 8.2, 8.3) and supports **Laravel 7 through 12**.
+
 ~~~
-composer require arietimmerman/laravel-scim-server
+composer require arietimmerman/laravel-scim-server "^2.0"
 ~~~
 
 And optionally
